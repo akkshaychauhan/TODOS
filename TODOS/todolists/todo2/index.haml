@@ -1,0 +1,46 @@
+%p Simple todo-"app". Try hover and drag todo items.
+
+.container
+  .add
+    %i.fa.fa-plus
+  .title
+    %h1 Things to do
+  .new-task
+    %a.add-new{:href => "#"}
+      %i.fa.fa-plus
+    %input#todo-text{:placeholder => "New task"}
+  %ul
+    %li.row
+      %a.remove{:href => "#"}
+        %i.fa.fa-trash-o
+      %a.completed{:href => "#"}
+        %i.fa.fa-check
+      Go to the bank
+      
+    %li.row
+      %a.remove{:href => "#"}
+        %i.fa.fa-trash-o
+      %a.completed{:href => "#"}
+        %i.fa.fa-check
+      Buy food
+      
+    %li.row
+      %a.remove{:href => "#"}
+        %i.fa.fa-trash-o
+      %a.completed{:href => "#"}
+        %i.fa.fa-check
+      Clean the house
+      
+    %li.row
+      %a.remove{:href => "#"}
+        %i.fa.fa-trash-o
+      %a.completed{:href => "#"}
+        %i.fa.fa-check
+      Make dinner
+      
+    %li.row
+      %a.remove{:href => "#"}
+        %i.fa.fa-trash-o
+      %a.completed{:href => "#"}
+        %i.fa.fa-check
+      Pick up the kids   

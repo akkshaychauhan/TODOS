@@ -1,0 +1,18 @@
+%div{ 'ng-app': 'todo' }
+  %div.wrap{ 'ng-controller': 'TodoController as todoList' }
+    %h1 
+      There are
+      %span.highlight {{getTotal()}}
+      todos
+    %form{ 'ng-submit': 'addTodo()' }
+      %input{ type: 'text', required: true, 'ng-model': 'task', 'ng-model-instant': true, 'placeholder': 'Do the laundry' }
+      %input.number{name: 'hours', type: 'number', value: '1', 'ng-model': 'hours', min: '0', max: '99' }
+      %button.blue{ type: 'submit' } Add Item
+      %button.red{ type: 'button', 'ng-click': 'clearComplete()' } Clear
+    %table.table.table-striped
+      %tr{ 'ng-repeat': 'item in todos', 'ng-class-odd': '"odd"', 'class': 'complete-{{item.complete}}' }
+        %td.first-col
+          %input{ type: 'checkbox', 'ng-model': 'item.complete' }
+        %td
+          %h4 {{item.text}}
+          %p {{item.hours}} hour(s)

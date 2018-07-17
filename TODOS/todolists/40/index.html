@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>A Whole ToDo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+
+  
+      <link rel="stylesheet" href="css/style.css">
+
+  
+</head>
+
+<body>
+
+  <!--
+To-Do App with Local Storage, Add, Delete, && Search Functionality. 
+Any changes you make are saved for your return. 
+Click the "clear my local storage" button to clear cache && reset default list.
+!-->
+
+<html lang="en" ng-app="todo">
+<body ng-controller="TodoCtrl" ng-init="init()">
+  <div class="container" id="wrapper">
+    <form name="createForm" class="form" novalidate>
+      <section class="row">
+        <div class="col-1" id="addTask">
+          <input class="form-control" type="text" data-ng-model="newTodo.Name" placeholder="I Need To..." required />
+          <button class="add" ng-click="addTodo(newTodo)" data-ng-disabled="createForm.$invalid">➕</button>
+        </div>
+        <div class="col-1" id="search">
+          <input type="text" class="form-control" data-ng-model="todoSearch.name" placeholder=" Search Tasks   🔎" />
+        </div>
+      </section>
+      <section class="row" id='actions'>
+        <div class="col-1">
+          <button class='control' data-ng-disabled="!doneCount()>0" data-ng-click="clearCompleted()">Delete {{doneCount()}} Completed</button>
+        </div>
+        <div class="col-1">
+          <button class='control' data-ng-click="markAllDone()" data-ng-disabled="!almostOneNotDone()">Mark All Completed</button>
+        </div>
+        <div class="col-1">
+          <button class='control' data-ng-click="uncheckAllDone()" data-ng-disabled="!doneCount()>0">Unmark All Completed</button>
+        </div>
+        <div class="col-1">
+          <button class='control' data-ng-click="deleteAll()" data-ng-disabled="!todos.length">Delete All</button>
+        </div>
+      </section>
+      <section class="row" id='stats'>
+        <div class="col-1">
+          <span data-ng-if="todos.length-doneCount()==0">No&nbsp;</span><span>Tasks&nbsp;<span class="badge" data-ng-if="todos.length-doneCount()!=0">Remaining :&nbsp;{{todos.length-doneCount()}}</span></span>
+        </div>
+        <div class="col-1">
+          <div class="text-right">Today is {{getDate()}}</div>
+        </div>
+      </section>
+      <section class="row">
+        <div class='col-2' id='items' ng-hide="todos.length">
+          <span class="todoName text-center">Good Job! All Tasks Are Complete.</span>
+        </div>
+      </section>
+      <section class="row" ng-repeat="todo in todos | filter:todoSearch.name" ng-class="{'todoItem-done': todo.isDone, 'todoItem-toDo': !todo.isDone}">
+        <div class="col-2" id='ac'>
+          <label for "done">Done
+            <br>
+            <input class="form-control" ng-model="todo.isDone" type="checkbox" name="done" />
+          </label>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <label for "delete" id='del'>Delete
+            <br>
+            <button type="button" ng-click="deleteTodo($index)" name="delete"></button>
+          </label>
+        </div>
+        <div class="col-2" id="list">
+          <span class="todoName" data-ng-class="{'toDoLineDone': todo.isDone}" data-ng-bind="todo.Name">
+          </div>
+          </section>  
+         <section class = 'row' id = 'cls'>
+           <div class = "col-2" >
+            <button ng-click = 'clear()' >Clear My Local Storage</button>
+           </div>
+        </section>
+          </div>
+        </form> 
+  </div>                     
+</body>
+  <script src='https://code.angularjs.org/1.3.0-rc.2/angular.js'></script>
+<script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/131045/ngLocalStorage.js'></script>
+
+  
+
+    <script  src="js/index.js"></script>
+
+
+
+
+</body>
+
+</html>

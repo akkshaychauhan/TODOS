@@ -1,0 +1,36 @@
+# Create the Module
+todo = angular.module('todo', [])
+
+# Create the Controller
+todo.controller( 'todo_ctrl', ($scope) ->
+
+  # Array to hold the list items
+  $scope.todos = []
+  
+  # Display the total number of items
+  $scope.get_total_todos = ->
+    return $scope.todos.length
+
+  # Handle adding a todo item
+  $scope.add_todo = ->
+    $scope.todos.push
+      text: $scope.form_todo_text
+      done: false
+
+    $scope.form_todo_text = ""
+    return
+  
+  # Handle completing a todo
+  $scope.toggle_todo = ->
+    this.todo.done = !this.todo.done
+
+  # Handle clearing of completed todos
+  $scope.clear_completed = ->
+    done = (el) ->
+      if not el.done
+        return el
+      
+    $scope.todos = $scope.todos.filter(done)
+
+  return
+)

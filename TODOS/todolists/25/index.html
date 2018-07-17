@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>todo</title>
+  
+  
+  <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
+<link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css'>
+
+      <link rel="stylesheet" href="css/style.css">
+
+  
+</head>
+
+<body>
+
+  <div id="app">
+<div class="container-fluid col-centered todo-app">
+<center><h1><strong>todos</strong></h1></center>
+<input class="form-control" v-model="newTodo" v-on:keyup.enter="addTodo(todo)">
+<h3><i>uncompleted </i><span v-show="remaining">({{ remaining.length }})</span></h3>
+<ul class="list-group" v-show="todos.length">
+<li class="list-group-item list-group-item-info" v-for="todo in remaining">
+<span>{{ todo.task }}</span>
+<button class="btn btn-default" v-on:click="removeTodo(todo)"><span class="glyphicon glyphicon-remove" />
+</button>
+</button>
+<button class="btn btn-default" @click="completed(todo)"><span class="glyphicon glyphicon-ok" />
+</button>
+</li>
+</ul>
+<p v-else>Start hacking and add some tasks!</p>
+<div v-if="complete.length">
+<h3><i>completed</i> ({{ complete.length }})</h3>
+<ul class="list-group">
+<li class="list-group-item list-group-item-success" v-for="todo in complete">
+{{ todo.task }}
+<button class="btn btn-default" @click="completed(todo)"><span class="glyphicon glyphicon-ok" />
+</li>
+</ul>
+<button class="btn btn-danger" @click="clearAllCompleted()">clear <span class="glyphicon glyphicon glyphicon-remove-sign" />
+</div>
+</div>
+</div>
+<div class="container-fluid col-centered footer">
+<center>
+<a href="https://www.twitter.com/osterbergmarcus" target="_new"><i class="fa fa-twitter"></i></a>
+<a href="https://www.github.com/osterbergmarcus" target="_new"><i class="fa fa-github-square"></i></a>
+<a href="https://www.codepen.io/osterbergmarcus" target="_new"><i class="fa fa-codepen"></i></a>
+</center>
+</div>
+  <script src='http://cdnjs.cloudflare.com/ajax/libs/vue/1.0.16/vue.min.js'></script>
+
+  
+
+    <script  src="js/index.js"></script>
+
+
+
+
+</body>
+
+</html>

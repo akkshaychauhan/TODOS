@@ -1,0 +1,99 @@
+// Simulate imports
+const {  CSSTransitionGroup } = React.addons;
+const {  Component } = React;
+const {  render,  findDOMNode } = ReactDOM;
+
+const log = console.log.bind(console);
+
+// Presentation, dumb component
+const TodoList = props => {
+  
+  const ListItem = (item, index) => 
+  (<div key={item.id} className="list-item" index={index}>
+    <button onClick={ () => props.completed(item, index) } className={item.isCompleted ? 'is-completed' : null}>{item.text}</button>
+    <button onClick={ () => props.remove(item, index) }> x </button>
+  </div>);
+  
+  const items = props.items.map(ListItem);
+
+  return (
+    <div class="list">
+    <CSSTransitionGroup transitionName="example" transitionEnterTimeout={300} transitionLeaveTimeout={500}>
+      {items}
+    </CSSTransitionGroup>
+    </div>
+  );
+};
+
+// Container, smart component, the event and logic methods are defined here
+class TodoApp extends Component {
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      items: [],
+      text: '',
+    };
+
+    // bind this scope to TodoApp
+    this.onChange = this.onChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  onChange(event) {
+    this.setState({
+      text: event.target.value,
+    });
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
+
+    // Add new item to array
+    let nextItems = [{
+        text: this.state.text,
+        id: Date.now(),
+        isCompleted: false
+      },
+      ...this.state.items
+    ];
+
+    // Update state
+    this.setState({
+      items: nextItems,
+      text: '',
+    });
+
+    findDOMNode(this.refs.todoInput).focus();
+  }
+
+  // TODO: Implement logic
+  handleRemove(item, index) {
+    log('handleRemove');
+    //log(item);    
+    log(index);
+  }
+
+  // TODO: Implement logic
+  handleCompleted(item, index) {
+    log('handleCompleted');
+    //log(item);    
+    log(index);
+  }
+
+  render() {
+    return (
+      <div className="react-app">
+        <h3>TODO</h3>
+         <form onSubmit={this.handleSubmit}>
+          <input className="form-control"  ref="todoInput" onChange={this.onChange} value={this.state.text} placeholder="type something..." autoFocus="true" />
+          <button className="">{'Add #' + (this.state.items.length + 1)}</button>
+        </form>
+        <TodoList items={this.state.items} remove={this.handleRemove} completed={this.handleCompleted}/>
+      </div>
+    );
+  }
+};
+
+render(<TodoApp />, document.getElementById('react'));

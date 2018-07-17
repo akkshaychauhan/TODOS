@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>Fridays - ToDo</title>
+  
+  
+  <link rel='stylesheet prefetch' href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700'>
+<link rel='stylesheet prefetch' href='https://boomtownroi.github.io/boomstrap/css/boomstrap.css'>
+
+      <link rel="stylesheet" href="css/style.css">
+
+  
+</head>
+
+<body>
+
+  <div ng-app="TodoApp" class="container">
+  <div ng-controller="TodoCtrl" class="col-xs-6 col-xs-offset-3">
+    <h1>My Todo List</h1>
+    <div
+         ng-repeat="todo in todos track by $index" class="callout"
+         ng-class="{ 'callout-info': !todo.done, 'callout-success': todo.done }">
+      <i
+         class="ficon ficon-checkmark mark-done"
+         ng-click="markSuccess($index)"></i>
+      <span>{{ todo.name }}</span>
+      <span class="close" ng-click="remove($index)">&times;</span>
+    </div>
+    <form
+          class="form-inline todo-form col-xs-8 col-xs-offset-2"
+          role="form"
+          ng-submit="addTodo()">
+      <div class="input-group" id="todoInput">
+        <label class="sr-only" for="todoInput">Todo</label>
+        <input
+          type="text"
+          class="form-control"
+          ng-model="toAdd"
+          placeholder="What do you need to do?">
+        <span class="input-group-btn">
+          <button type="submit" class="btn btn-default">Add Todo</button>
+        </span>
+      </div>
+    </form>
+  </div>
+</div>
+  <script src='http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.16/angular.min.js'></script>
+
+  
+
+    <script  src="js/index.js"></script>
+
+
+
+
+</body>
+
+</html>

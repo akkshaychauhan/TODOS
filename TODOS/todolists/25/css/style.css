@@ -1,0 +1,22 @@
+body {
+    font-family: 'Helvetica Neue', sans-serif;
+    background-color: #DEDEDE;
+}
+
+.todo-app {
+  height: relative;
+  width: 500px;
+  position: relative;
+}
+
+.btn {
+  float: right;
+  font-size: 10px;
+  line-height: 1px;
+}
+
+.footer {
+  height: relative;
+  width: 600px;
+  position: relative;
+}

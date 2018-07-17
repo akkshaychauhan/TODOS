@@ -1,0 +1,12 @@
+%section{ "ng-app" => "todo", "ng-controller" => "todo_ctrl" }
+  %h1.center
+    %ng-pluralize{ "count" => "get_total_todos()",
+                 "when" => "{'0': 'You have nothing to do.', '1': 'You have {} thing to do.', 'other': 'You have {} things to do.'}" }
+  %ul.todo
+    %li{ "class" => "todo-item done-{{todo.done}}", "ng-repeat" => "todo in todos", "ng-model" => "todo.done", "ng-click" => "toggle_todo()" }
+      %span.todo-item-description {{todo.text}}
+    %li.todo-item
+      %form{ "ng-submit" => "add_todo()" }
+        %input.todo-item-description{ "placeholder" => "Add an item", "ng-model" => "form_todo_text", "ng-model-instant" => true }
+    %li.todo-item-clear{ "ng-click" => "clear_completed()" }
+      %span Clear Completed

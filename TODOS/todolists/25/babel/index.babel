@@ -1,0 +1,43 @@
+'strict mode'
+new Vue({
+  el: '#app',
+  data: {
+    newTodo: '',
+    todos: [
+      { task: 'Learn vuejs', completed: false}, 
+      { task: 'Build a todo app', completed: true}
+    ]
+  },
+  
+  computed: {
+    complete(todo) {
+      return this.todos.filter(this.isCompleted);
+    },
+    remaining(todo) {
+      return this.todos.filter(this.inProgress);
+    }
+  },
+  
+  methods: {
+    isCompleted(todo) {
+      return todo.completed;
+    },
+    inProgress(todo) {
+      return ! this.isCompleted(todo);
+    },
+    addTodo(todo) {
+      let text = this.newTodo.trim();
+      this.todos.push({task: text,completed: false});
+      this.newTodo = '';
+    },
+    removeTodo(todo) {
+      this.todos.$remove(todo);
+    },
+    completed(todo) {
+      todo.completed = ! todo.completed;
+    },
+    clearAllCompleted() {
+      this.todos = this.todos.filter(this.inProgress);
+    }
+  }
+})
