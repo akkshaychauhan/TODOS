@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>25sprout | todo list</title>
+  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+
+  <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css'>
+
+      <link rel="stylesheet" href="css/style.css">
+
+  
+</head>
+
+<body>
+
+  <body>
+        <div class="title">
+                <h1>25 todos</h1>
+        </div>
+        <div class="container">
+
+                <nav class="todo_nav">
+                        <ul class="todo_select">
+                                <li class="active">ALL</li>
+                                <li>PENDING</li>
+                                <li>DONE</li>
+                        </ul>
+                </nav>
+
+                <div class="todo_content">
+                        <div class="content_add active">
+                                <div class="todo_tips">
+                                        <ul>
+                                                <li class="todo_1"><p>- Do Homework. </p><div class="btn-group"><div class="btn del-btn"><i class="fa fa-trash" aria-hidden="true"></i></div><div class="btn edit-btn"><i class="fa fa-pencil" aria-hidden="true"></i></div></div></li>
+                                                <li class="todo_2"><p>- Go Sleep. </p><div class="btn-group"><div class="btn del-btn"><i class="fa fa-trash" aria-hidden="true"></i></div><div class="btn edit-btn"><i class="fa fa-pencil" aria-hidden="true"></i></div></div></li>
+                                        </ul>
+                                </div>
+                                <div class="todo_add_btn"></div>
+                        </div>
+                        <div class="content_pending">
+                                <div class="todo_tips">
+                                        <ul>
+                                                <li class="todo_1"><p>- Do Homework. </p><div class="btn-group"><div class="btn">Done?</div></div></li>
+                                        </ul>
+                                </div>
+                        </div>
+                        <div class="content_done">
+                                <div class="todo_tips">
+                                        <ul>
+                                                <li class="todo_2"><p>- Go Sleep. </p><div class="btn-group"><div class="btn">Not done?</div></div></li>
+                                        </ul>
+                                </div>
+                        </div>
+                </div>
+                <div class="todo_info">
+                        <div class="info_btn active">New thing todo?</div>
+                        <div class="info_input info_init">
+                                <form id="create_form" >
+                                        <div class="form_content">
+                                                <input id="todo_input" class="input_style" name="text" type="text" placeholder="do something?" />
+                                                <input id="todo_submit" class="submit_style" type="submit" name="submit" value="Submit">
+                                                <div class="remove_input"></div>
+                                        </div>
+                                </form>
+
+                        </div>
+                        <div class="info_input info_update">
+                                <form id="update_form" >
+                                        <div class="form_content">
+              <input id="todo_update_id" type="hidden">
+                                                <input id="todo_update" class="input_style" name="text" type="text"/>
+                                                <input id="submit_update" class="submit_style" type="submit" name="submit" value="Update">
+                                                <div class="remove_input"></div>
+                                        </div>
+                                </form>
+
+                        </div>
+                </div>
+        </div>
+        <div class="blog_title"><a href="https://lichin.me" class="blog_attr">visit my blog</a></div>
+</body>
+  <script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
+
+  
+
+    <script  src="js/index.js"></script>
+
+
+
+
+</body>
+
+</html>

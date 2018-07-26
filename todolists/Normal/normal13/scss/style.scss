@@ -1,0 +1,76 @@
+@import '//fonts.googleapis.com/css?family=Quattrocento+Sans|Gravitas+One';
+@import '//file.myfontastic.com/ZaFwNCeg8fYbraeqqP46nE/icons.css';
+*,
+*:before,
+*:after {
+	box-sizing: border-box;
+}
+
+body {
+	font: 18px/1.6 'Quattrocento Sans', sans-serif;
+}
+
+h1,
+h3 {
+	font-family: 'Gravitas One', cursive;
+	margin: 0;
+}
+
+[class*='ico-'] {
+	font-family: todo;
+	font-size: 1.4rem;
+	line-height: 1;
+}
+
+
+.todo {
+	width: 80%;
+	margin: auto;
+	padding: 30px;
+	
+	&_item {
+		display: flex;
+		align-items: center;
+		margin-bottom: .5rem;
+		position: relative;
+		align-items: flex-start;
+		
+		> a {
+			text-decoration: none;
+			color: #000;
+			text-align: center;
+			position: relative;
+			top:.25em;
+		}
+	}
+	&_task,
+	&_new {
+		width: 100%;
+		outline: none;
+		border-bottom: 1px solid #ccc;
+		margin: 0 10px;
+	}
+	&_new {
+		margin-right: 33px;
+	}
+	&_done {
+		opacity: .5;
+		h3:only-child {
+			display: none;
+		}
+		.todo_task {
+			text-decoration: line-through;
+		}
+	}
+	&_new ~ span {
+		position: absolute;
+		width: 100%;
+		left: 33px;
+		color: #ccc;
+		z-index: -1;
+		display: none;
+	}
+	&_new:empty ~ span {
+		display: block;
+	}
+}

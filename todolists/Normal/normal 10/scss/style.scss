@@ -1,0 +1,198 @@
+@import "compass/css3";
+
+$font-size-base: 16px;
+$body-bg: lighten(#ccc, 15%);
+
+// Todo input
+$todo-edit-color: #333;
+$todo-input-font-size: $font-size-base * 1.5;
+$todo-edit-font-size: $todo-input-font-size;
+
+$todo-edit-padding: 15px 80px 15px 80px;
+
+// Todo controls
+$todo-control-color: #ccc;
+$todo-complete-color: green;
+$todo-remove-color: red;
+
+// Headline
+$todo-headline-bg: #663300;
+$todo-headline-color: #fff;
+
+// Container
+$todo-container-bg: #fff;
+$todo-list-vert-ruler: 1px solid #ff8c00; 
+
+// Todo
+$todo-list-horz-ruler: 1px solid #ccc;
+
+// Footer 
+$todo-footer-bg: #eaeaea;
+
+html, body {
+  background-color: $body-bg
+}
+
+.todo-headline {
+  background-color: $todo-headline-bg;
+  color: $todo-headline-color;
+  text-align: center;
+  text-transform: uppercase;
+  padding: {
+    top: 5px;
+    bottom: 5px;
+  }
+  position: relative;
+  z-index: 2;
+}
+
+.todo-container {
+  background-color: $todo-container-bg;
+  margin: 0 auto;
+  max-width: 600px; 
+  position: relative;
+  
+  &:before,
+	&:after {
+		border-left: $todo-list-vert-ruler;
+		content: '';
+		display: block;
+		position: absolute;		
+		top: 0;
+		bottom: 0;    
+    z-index: 1;
+  }
+  
+  &:before {
+    left: 60px;
+  }
+  
+  &:after {
+    left: 65px;
+  }
+  
+}
+
+.todo-footer {
+  padding: {
+    top: 5px;
+    bottom: 5px;
+  }
+  position: relative;
+  z-index: 2;
+}
+
+.todo-init {
+  backround-color: $todo-container-bg;
+  position: relative;
+}
+
+%todo-input-common {
+  background: none;
+  border: none;  
+  font: {
+    size: $todo-edit-font-size;
+    weight: normal;
+  } 
+  outline: none;
+  padding: $todo-edit-padding;
+  width: 100%;  
+  position: relative;
+  z-index: 1;
+}
+
+.todo-input {
+  @extend %todo-input-common;
+  display: none;
+  
+  &:first-child {
+    @include input-placeholder {
+      font-style: italic;
+    }
+    display: block;         
+  }
+}
+
+.todo-desc {
+  @extend %todo-input-common;
+}
+
+%todo-control-common {
+  color: $todo-control-color;
+  cursor: pointer;
+  display: block;
+  font-size: $todo-input-font-size;
+  width: 60px;
+  height: 40px;
+  position: absolute;  
+  top: 18px;
+  z-index: 2;
+}
+
+.todo-toggle {
+  @extend %todo-control-common;   
+  left: 20px;
+}
+
+.todo-toggle-all {
+   
+  
+  &.on {
+    color: $todo-complete-color;
+  }
+}
+
+.todo-remove {
+  @extend %todo-control-common;   
+  display: none;
+  color: $todo-remove-color;
+  right: 20px;
+}
+
+.todo-remove-all {
+  display: none;
+}
+
+.todo-list {
+  margin: 0;
+  padding: 0;   
+  
+  li {
+    display: block;  
+  }
+}
+
+.todo {
+  border-bottom: $todo-list-horz-ruler;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  
+  &:first-child {
+    border-top: $todo-list-horz-ruler;
+  }
+  
+  &:hover {
+    .todo-remove {
+      display: block;
+    }
+  }
+}
+
+.todo-toggle-complete {
+  color: $todo-complete-color;
+}
+
+.todo-footer {
+  background-color: $todo-footer-bg;
+}
+
+.todo-stats {  
+  top: 0;
+  margin: 0 auto;
+  
+  th, td {
+    text-align: center;
+    width: 150px;
+  }
+}

@@ -1,0 +1,198 @@
+const todo = (state, action) => {
+  switch (action.type) {
+    case 'ADD_TODO':
+      return {
+        id: action.id,
+        text: action.text,
+        completed: false
+      };
+    case 'TOGGLE_TODO':
+      if (state.id !== action.id) {
+        return state;
+      }
+      
+      return {
+        ...state,
+        completed: !state.completed
+      };
+    case 'EDIT_TODO':
+      if (state.id !== action.id) {
+        return state;
+      }
+      
+      return {
+        ...state,
+        text: action.text
+      };
+    default:
+      return state;
+  }
+};
+
+const todos = (state = [], action) => {
+  switch (action.type) {
+    case 'ADD_TODO':
+      return [
+        ...state,
+        todo(undefined, action)
+      ];
+    case 'TOGGLE_TODO':
+      return state.map(t =>
+        todo(t, action)                
+      );
+    case 'EDIT_TODO':
+      return state.map(t =>
+        todo(t, action)                
+      );
+    default:
+      return state;
+  }
+};
+
+const visibilityFilter = (
+  state = 'SHOW_ALL',
+  action
+) => {
+  switch (action.type) {
+    case 'SET_VISIBILITY':
+      return action.filter;
+    default:
+      return state;
+  }
+};
+
+const { combineReducers, createStore } = Redux;
+const todoApp = combineReducers({ todos, visibilityFilter });
+const store = createStore(todoApp);
+
+const { Component } = React;
+let nextTodoId = 0;
+
+class TodoApp extends Component {
+  render() {
+    const {todos, visibilityFilter} = this.props.store.getState();
+    const filteredTodos = todos.filter(todo => {
+      if (visibilityFilter === 'SHOW_ACTIVE') {
+        return !todo.completed;
+      }
+      if (visibilityFilter === 'SHOW_COMPLETED') {
+        return todo.completed;
+      }
+      return true;
+    })
+    
+    return (
+      <div className='container'>
+        <section>
+          <input placeholder='Add Task' ref={node => {
+          this.input = node;
+          }} />
+
+          <button onClick={() => {
+            this.props.store.dispatch({
+              type: 'ADD_TODO',
+              text: this.input.value,
+              id: nextTodoId++
+            });
+            this.input.value = '';
+            document.getElementById('saber-humm').play();
+          }}>
+          &#x26A1;
+          </button>
+
+          <ul>
+            {filteredTodos.map(todo =>
+            <li key={todo.id}
+                onMouseOver={() => {
+                  document.getElementById(todo.completed ? 'saber-wave' : 'saber-on').play();
+                }}
+                style={{textShadow: todo.completed ? 'none' : '0 0 10px rgb(255,255,255), 0 0 20px rgb(255,255,255), 0 0 30px rgb(255,255,255), 0 0 40px rgb(255,17,119), 0 0 70px rgb(255,17,119), 0 0 80px rgb(255,17,119), 0 0 100px rgb(255,17,119), 0 0 150px rgb(255,17,119)'}}>
+
+              <span style={{margin: '3px 20px 0 0'}}
+                    onClick={() => {
+                      this.props.store.dispatch({
+                      type: 'TOGGLE_TODO',
+                      id: todo.id
+                    });
+                    document.getElementById(todo.completed ? 'saber-humm' : 'saber-hit').play();
+              }}>
+                {todo.completed ? <span>&#x2620;</span> : <span>&#x2639;</span>}
+              </span>
+
+              <ContentEditable 
+                html={todo.text}
+                editTodo={text => {
+                  this.props.store.dispatch({
+                  type: 'EDIT_TODO',
+                  id: todo.id,
+                  text
+                });
+              }} />
+            </li>
+            )}
+          </ul>
+        </section>
+          
+        <footer>
+          <a id='vis1' href='#' onClick={e => this.setVisibility(e, 'SHOW_ALL')}>All</a>
+          <a id='vis2' href='#' onClick={e => this.setVisibility(e, 'SHOW_ACTIVE')}>Active</a>
+          <a id='vis3' href='#' onClick={e => this.setVisibility(e, 'SHOW_COMPLETED')}>Completed</a>
+        </footer>
+      </div>
+    )
+  }
+  
+  setVisibility(e, filter) {
+    this.props.store.dispatch({
+      type: 'SET_VISIBILITY',
+      filter
+    });
+    
+    const links = document.querySelectorAll('a');
+
+    for (var i = 0; i < links.length; i++) {
+      links[i].classList.remove('selected');
+    }
+    
+    e.target.classList.add('selected');
+  }
+}
+
+class ContentEditable extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {editing: false}
+  }
+  render() {
+    return (
+      this.state.editing ?
+        <input className='editor' ref='todoText' onBlur={e => this.handleChange(e)} defaultValue={this.props.html} />
+        :
+        <span onDoubleClick={e => this.handleDoubleClick()}>{this.props.html}</span>
+      );
+    }
+    handleDoubleClick() {
+      this.setState({
+        editing: true
+      });
+    }
+    handleChange(e) {
+      const text = this.refs.todoText.value;
+      this.props.editTodo(text);
+      this.setState({
+        editing: false
+      });
+    }
+}
+
+const render = () => {
+  ReactDOM.render(
+    <TodoApp 
+      store={store}
+    />,
+    document.getElementById('root')
+  )
+};
+
+store.subscribe(render);
+render();

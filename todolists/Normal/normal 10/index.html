@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>TodoMVC example using Backbone.js & Handlebars.js</title>
+  
+  
+  <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css'>
+
+      <link rel="stylesheet" href="css/style.css">
+
+  
+</head>
+
+<body>
+
+  <section id="app" class="todo-container">     
+  <h2 class="todo-headline">Todos</h2>
+  <div class="todo-init">   
+    
+    <input id="todo-create" class="todo-input" type="text" placeholder="What needs to be done?" autofocus>
+  
+    <span id="todo-toggle-all" class="todo-toggle todo-toggle-all glyphicon glyphicon-ok-sign" title="Toggle all todos"></span>
+    
+    <span id="todo-remove-all" class="todo-remove todo-remove-all glyphicon glyphicon-remove-circle" title="Remove all completed todos"></span>
+  </div>
+  
+  <ul id="todo-list" class="todo-list"></ul>
+  <footer class="todo-footer">
+    <table id="todo-stats" class="todo-stats">
+      <tr>
+        <th>Total</th>
+        <th>Completed</th>
+        <th>Incomplete</th>
+      </tr> 
+      <tr></tr>
+    </table>
+  </footer>
+</section>
+
+<script type="text/x-handlebars-template" id="todo-template">
+    
+  <span class="todo-toggle {{#if completed}} todo-toggle-complete {{/if}} glyphicon glyphicon-ok"></span>
+  <input class="todo-input todo-edit" type="text" value="{{description}}">
+  <label class="todo-desc">{{description}}</label>
+  <span class="todo-remove glyphicon glyphicon-remove"></span>
+
+</script>
+
+<script type="text/x-handlebars-template" id="todo-stats-template">
+  <td>{{totalTodos}}</td>
+  <td>{{completedTodos}}</td>
+  <td>{{incompleteTodos}}</td>
+</script>
+  <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.2/backbone-min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0/handlebars.min.js'></script>
+
+  
+
+    <script  src="js/index.js"></script>
+
+
+
+
+</body>
+
+</html>

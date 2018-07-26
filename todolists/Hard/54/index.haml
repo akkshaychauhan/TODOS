@@ -1,0 +1,136 @@
+.container
+  #sidebar
+    .options
+      %h1 Add New Task
+      %h2 Task name<br>
+      %textarea{:name => "description", :rows => "1", :id => "task-input", :placeholder => "Enter task name here"} 
+      <br><br>
+      %h2 Priority<br>
+      %input{:name => "priority", :type => "radio", :id => "pri-input", :value => "i"} Important<br>
+      %input{:name => "priority", :type => "radio", :id => "pri-input", :value => "s"} Should do<br> 
+      %input{:name => "priority", :type => "radio", :id => "pri-input", :value => "w"} Wanna do <br> <br>
+      %h2 Due Date 
+      %input{:name => "Due", :type => "date", :id => "date-input"} <br><br>
+
+      %button#add Add to list
+      
+  .main-content
+    .swipe-area
+      %a{"data-toggle" => ".container", :href => "#", :id => "sidebar-toggle"}
+        +
+      .title Todo List
+
+    .responsive
+      %ul.content
+        %li
+          .card-front
+            %h2 Urgent : Important
+            %ul.list#ui
+              %li 
+                Learn Haml
+                %button.delete Delete
+              %li 
+                Buy cups
+                %button.delete Delete
+              %li 
+                Buy cups
+                %button.delete Delete
+              %li 
+                Buy cups
+                %button.delete Delete                
+
+        %li#card
+          .card-front
+            %h2 Coming up : Important
+            %ul.list#ci
+              %li 
+                Learn Haml
+                %button.delete Delete
+              %li 
+                Buy cups
+                %button.delete Delete
+
+                
+        %li#card
+          .card-front
+            %h2 Have Time : Important
+            %ul.list#hi
+              %li 
+                Learn Haml
+                %button.delete Delete
+              %li 
+                Buy cups
+                %button.delete Delete
+
+        %li#card
+          .card-front
+            %h2 Urgent : Should do
+            %ul.list#us
+              %li 
+                Buy apples 
+                %button.delete Delete
+              %li 
+                Buy asad
+                %button.delete Delete
+              %li 
+                Buy asad
+                %button.delete Delete
+
+        %li#card
+          .card-front
+            %h2 Coming up : Should do
+            %ul.list#cs
+              %li 
+                Learn Haml
+                %button.delete Delete
+              %li 
+                Buy cups
+                %button.delete Delete
+                
+        %li#card
+          .card-front
+            %h2 Have time : Should do
+            %ul.list#hs
+              %li 
+                Learn Haml
+                %button.delete Delete
+              %li 
+                Buy cups
+                %button.delete Delete
+
+        %li#card
+          .card-front
+            %h2 Urgent : Wanna do
+            %ul.list#uw
+              %li 
+                Learn Haml
+                %button.delete Delete
+              %li 
+                Buy cups
+                %button.delete Delete
+
+        %li#card
+          .card-front
+            %h2 Coming up : Wanna do
+            %ul.list#cw
+              %li 
+                Learn Haml
+                %button.delete Delete
+              %li 
+                Buy cups
+                %button.delete Delete
+
+        %li#card
+          .card-front
+            %h2 Have time : Wanna do
+            %ul.list#hw
+              %li 
+                Buy apples 
+                %button.delete Delete
+              %li 
+                Buy asad
+                %button.delete Delete
+              %li 
+                Buy asad
+                %button.delete Delete
+

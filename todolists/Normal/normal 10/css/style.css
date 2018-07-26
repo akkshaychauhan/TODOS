@@ -1,0 +1,147 @@
+html, body {
+  background-color: #f2f2f2;
+}
+
+.todo-headline {
+  background-color: #663300;
+  color: #fff;
+  text-align: center;
+  text-transform: uppercase;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  position: relative;
+  z-index: 2;
+}
+
+.todo-container {
+  background-color: #fff;
+  margin: 0 auto;
+  max-width: 600px;
+  position: relative;
+}
+.todo-container:before, .todo-container:after {
+  border-left: 1px solid #ff8c00;
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 1;
+}
+.todo-container:before {
+  left: 60px;
+}
+.todo-container:after {
+  left: 65px;
+}
+
+.todo-footer {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  position: relative;
+  z-index: 2;
+}
+
+.todo-init {
+  backround-color: #fff;
+  position: relative;
+}
+
+.todo-input, .todo-desc {
+  background: none;
+  border: none;
+  font-size: 24px;
+  font-weight: normal;
+  outline: none;
+  padding: 15px 80px 15px 80px;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+.todo-input {
+  display: none;
+}
+.todo-input:first-child {
+  display: block;
+}
+.todo-input:first-child:-moz-placeholder {
+  font-style: italic;
+}
+.todo-input:first-child::-moz-placeholder {
+  font-style: italic;
+}
+.todo-input:first-child:-ms-input-placeholder {
+  font-style: italic;
+}
+.todo-input:first-child::-webkit-input-placeholder {
+  font-style: italic;
+}
+
+.todo-toggle, .todo-remove {
+  color: #ccc;
+  cursor: pointer;
+  display: block;
+  font-size: 24px;
+  width: 60px;
+  height: 40px;
+  position: absolute;
+  top: 18px;
+  z-index: 2;
+}
+
+.todo-toggle {
+  left: 20px;
+}
+
+.todo-toggle-all.on {
+  color: green;
+}
+
+.todo-remove {
+  display: none;
+  color: red;
+  right: 20px;
+}
+
+.todo-remove-all {
+  display: none;
+}
+
+.todo-list {
+  margin: 0;
+  padding: 0;
+}
+.todo-list li {
+  display: block;
+}
+
+.todo {
+  border-bottom: 1px solid #ccc;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+.todo:first-child {
+  border-top: 1px solid #ccc;
+}
+.todo:hover .todo-remove {
+  display: block;
+}
+
+.todo-toggle-complete {
+  color: green;
+}
+
+.todo-footer {
+  background-color: #eaeaea;
+}
+
+.todo-stats {
+  top: 0;
+  margin: 0 auto;
+}
+.todo-stats th, .todo-stats td {
+  text-align: center;
+  width: 150px;
+}

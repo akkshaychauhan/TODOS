@@ -1,0 +1,109 @@
+const TodoItem = (props) => {
+    const { item, completeItem } = props;
+    return (
+      <li > 
+        <p className="todo-text">{item.text}</p>
+        <span className="todo-btn-done" onClick={completeItem}>
+          <i className="fa fa-check" />
+        </span>
+      </li>
+    );
+}
+
+const OneInputForm = (props) => {
+  const { value, hover, onChange, onSubmit, mouseEnter, mouseOut } = props;
+  return (
+    <div onMouseOver={mouseEnter} onMouseOut={mouseOut}>
+    <form onSubmit={onSubmit}>
+      <input 
+        onChange={onChange} 
+        value={value} 
+        placeholder="add a todo..."/>
+      <button className='display' >Add</button>
+    </form> 
+    </div>
+  )
+}
+
+class ToDoList extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  
+  componentDidUpdate() {
+    const node = this.refs["list"]
+    if (node) {
+      node.scrollTop = node.scrollHeight;
+    }
+  }
+  
+  render() {
+    const { todos, completeItem } = this.props;
+    return (
+      <section className="main">
+        <ul className="todo-list" ref="list">
+          {todos.map( todo => (
+            <TodoItem 
+              item={todo} 
+              key={todo.id} 
+              completeItem={completeItem.bind(null, todo)} />
+          ))}
+        </ul>
+      </section>
+    );
+  }
+}
+
+class TodoApp extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      todos: [{text: "item 1", id:Date.now()}], 
+      formText: '',
+      hover: false
+    };
+    this.onChange = this.onChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.completeItem = this.completeItem.bind(this);
+  }
+  
+  onChange(e) {
+    this.setState({formText: e.target.value});
+  }
+  
+  handleSubmit(e) {
+    e.preventDefault();
+    const formText = this.state.formText;
+    if (formText.length > 0) {
+      var nextItems = this.state.todos.concat([{text: formText, id: Date.now()}]);
+      this.setState({todos: nextItems, formText: ""});
+    }
+  }
+  
+  completeItem(completedItem) {
+    console.log("hey")
+    const nextItems = this.state.todos.filter( item => {
+      return item.id != completedItem.id;
+    });
+    this.setState({todos: nextItems})
+  }
+  
+  render() {
+    const { todos } = this.state;
+    return (
+      <div className="todoapp">
+        <h3>TODO</h3>
+        <ToDoList todos={this.state.todos} completeItem={this.completeItem}/>
+        <OneInputForm
+          value={this.state.formText}
+          onChange={this.onChange}
+          onSubmit={this.handleSubmit}/>
+      </div>
+    );
+  }
+};
+
+ReactDOM.render(
+  <TodoApp />, 
+  document.getElementById("app")
+);

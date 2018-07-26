@@ -1,0 +1,368 @@
+@import url(https://fonts.googleapis.com/css?family=Raleway:100,400);
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  font-size: 100%;
+  vertical-align: baseline;
+}
+
+html {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle;
+}
+
+q, blockquote {
+  quotes: none;
+}
+q:before, q:after, blockquote:before, blockquote:after {
+  content: "";
+  content: none;
+}
+
+a img {
+  border: none;
+}
+
+article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
+  display: block;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+  -webkit-box-sizing: border-box;
+}
+
+body {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  background-color: #3b3b3b;
+  color: #FFFFFF;
+  overflow: hidden;
+  background-size: cover;
+  display: flex;
+  min-height: 100vh;
+}
+
+button {
+  border: none;
+  webkit-appearance: none;
+  background: none;
+  display: block;
+  width: 100%;
+  cursor: pointer;
+  outline: none;
+  margin: 0;
+  padding: 0;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 100;
+}
+
+input, textarea {
+  outline: none;
+  border: none;
+  -webkit-appearance: none;
+  border-radius: 0;
+}
+
+[type="text"] {
+  width: 100%;
+  color: #FFFFFF;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 100;
+  font-style: italic;
+  font-size: 1.45em;
+  background-color: rgba(255, 255, 255, 0.35);
+  padding: .5em .9375em;
+}
+[type="text"]::-webkit-input-placeholder {
+  color: #FFFFFF;
+  font-style: italic;
+}
+
+[type="submit"] {
+  cursor: pointer;
+}
+
+h1 {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 100;
+  font-size: 2em;
+  margin: 1.2em 0;
+  text-align: center;
+  flex: 1;
+}
+
+h2 {
+  font-size: 1.5em;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 100;
+  margin: 0 0 1em 0;
+}
+
+header {
+  text-align: center;
+  position: relative;
+  display: flex;
+}
+
+.btn--menu {
+  width: 2em;
+  display: inline-block;
+  padding: 0.675em 0;
+  margin: auto;
+  vertical-align: middle;
+  text-indent: -119988px;
+  overflow: hidden;
+  text-align: left;
+  text-transform: capitalize;
+  -moz-transition: all, 0.5s;
+  -o-transition: all, 0.5s;
+  -webkit-transition: all, 0.5s;
+  transition: all, 0.5s;
+}
+.btn--menu span {
+  display: block;
+  position: relative;
+  height: 2px;
+  width: 2em;
+  background-color: #fff;
+}
+.btn--menu span::before, .btn--menu span::after {
+  -moz-transition: all, 0.5s;
+  -o-transition: all, 0.5s;
+  -webkit-transition: all, 0.5s;
+  transition: all, 0.5s;
+  content: "";
+  display: block;
+  background-color: #fff;
+  width: 100%;
+  height: 2px;
+  position: absolute;
+}
+.btn--menu span::after {
+  top: 0.5em;
+}
+.btn--menu span::before {
+  bottom: 0.5em;
+}
+.btn--menu:hover span::before {
+  -moz-transform: translateY(-0.125em);
+  -ms-transform: translateY(-0.125em);
+  -webkit-transform: translateY(-0.125em);
+  transform: translateY(-0.125em);
+}
+.btn--menu:hover span::after {
+  -moz-transform: translateY(0.125em);
+  -ms-transform: translateY(0.125em);
+  -webkit-transform: translateY(0.125em);
+  transform: translateY(0.125em);
+}
+.btn--menu.actived {
+  overflow: visible;
+  -moz-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  -webkit-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+.btn--menu.actived span::before, .btn--menu.actived span::after {
+  width: 50%;
+  -moz-transform-origin: 0 0;
+  -ms-transform-origin: 0 0;
+  -webkit-transform-origin: 0 0;
+  transform-origin: 0 0;
+}
+.btn--menu.actived span::before {
+  bottom: 0;
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+.btn--menu.actived span::after {
+  top: 0;
+  -moz-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}
+.btn--menu.actived:hover {
+  -moz-transform: translateX(0.2em) rotate(180deg);
+  -ms-transform: translateX(0.2em) rotate(180deg);
+  -webkit-transform: translateX(0.2em) rotate(180deg);
+  transform: translateX(0.2em) rotate(180deg);
+}
+
+.content {
+  overflow: hidden;
+}
+
+.view {
+  max-width: 500px;
+  width: 100%;
+  margin: auto;
+  position: relative;
+  padding: 0 .5em;
+}
+
+/* Todo */
+.todos form {
+  /*position: relative;*/
+  display: flex;
+}
+.todos form [type="submit"] {
+  line-height: 0.5;
+  width: 1em;
+  cursor: pointer;
+  font-size: 3.5em;
+  color: #FFFFFF;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 400;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+.todos .todos-wrapper {
+  margin-top: 1.5em;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+.todos .todos-wrapper .todo {
+  display: flex;
+  justify-content: space-between;
+  padding: .625em 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+}
+.todos .todos-wrapper .todo:last-child {
+  border-bottom: none;
+}
+.todos .todos-wrapper .todo.completed .todo-text {
+  text-decoration: line-through;
+}
+.todos [type="checkbox"] {
+  display: block;
+  position: relative;
+  min-width: 1.2rem;
+  height: 1.2rem;
+  margin: auto 1em;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+.todos [type="checkbox"]:checked:before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: -.5em;
+  left: -.1em;
+  width: 1.7em;
+  height: 1.2em;
+  border-bottom: 2px solid #FFFFFF;
+  border-left: 2px solid #FFFFFF;
+  -webkit-transform: rotate(-45deg);
+}
+.todos .remove-todo {
+  display: block;
+  color: #FFFFFF;
+  width: auto;
+  padding: .5em 1.5em;
+  margin: auto;
+}
+.todos .todo-text {
+  margin: auto;
+  font-size: 1.2em;
+  width: 100%;
+}
+.todos .actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2em;
+}
+.todos .actions label {
+  display: block;
+  margin: auto;
+  width: 100%;
+  font-size: .875em;
+}
+.todos .actions label span {
+  font-style: italic;
+  text-decoration: line-through;
+}
+.todos .actions button {
+  display: inline-block;
+  font-size: 1em;
+  color: #FFFFFF;
+  padding: .5rem 1rem;
+  margin: auto;
+  background-color: rgba(255, 255, 255, 0.35);
+}
+
+/* settings */
+.settings {
+  position: absolute;
+  left: 100%;
+  top: 0;
+  bottom: 0;
+  padding-left: 1em;
+  width: 50%;
+  border-left: 1px solid rgba(255, 255, 255, 0.2);
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+  opacity: 0;
+  -moz-transform: translateX(50px);
+  -ms-transform: translateX(50px);
+  -webkit-transform: translateX(50px);
+  transform: translateX(50px);
+  -moz-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+}
+.settings.menu-opened {
+  filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
+  opacity: 1;
+  -moz-transform: translateX(0);
+  -ms-transform: translateX(0);
+  -webkit-transform: translateX(0);
+  transform: translateX(0);
+}
+.settings [type="text"] {
+  font-size: 1rem;
+  margin: .5em 0 1em 0;
+}
+.settings [type="submit"] {
+  font-size: 1rem;
+  background-color: rgba(255, 255, 255, 0.6);
+  color: #FFFFFF;
+  padding: 1em 1.5em;
+  width: 100%;
+  -moz-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+}
+.settings [type="submit"]:hover {
+  background-color: rgba(255, 255, 255, 0.4);
+}

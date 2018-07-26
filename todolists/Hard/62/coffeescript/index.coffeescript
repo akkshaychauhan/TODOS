@@ -1,0 +1,52 @@
+{ul, li, div, h2, form, input, a, button} = React.DOM
+
+TodoList = React.createClass
+  displayName: "TodoList"
+
+  render: ->
+    console.log "TodoList.render called"
+    createItem = (itemText) ->
+      li {}, itemText
+    ul {}, @props.items.map createItem
+
+TodoApp = React.createClass
+  getInitialState: ->
+    {items: [], text: ""}
+
+  displayName: "TodoApp"
+
+  onChange: (e) ->
+    console.log "changing to #{e.target.value}"
+    @setState text: e.target.value
+
+  handleSubmit: (e) ->
+    console.log "handleSubmit", e
+    e.preventDefault()
+    nextItems = @state.items.concat [@state.text]
+    nextText = ""
+    @setState {items: nextItems, text: nextText}
+
+  render: ->
+    div({},
+      (h2 {}, "Todo List"),
+      (TodoList {items: @state.items}),
+      (form {onSubmit: @handleSubmit},
+        # TODO Turn all these div calls into helpers
+        (div {className: "row"},
+          (div {className: "columns large-12"},
+            (div {className: "row collapse postfix-radius"},
+              (div {className: "small-9 columns"},
+                (input {onChange: @onChange, value: @state.text, placeholder: "add task…", type: "text"})
+              ),
+              (div {className: "small-3 columns"},
+                (a {className: "button postfix", onClick: @handleSubmit}, "Add ##{@state.items.length + 1}")
+              )
+            )
+          )
+        )
+      )
+    )
+
+example = document.getElementById "example"
+todoApp = React.createElement TodoApp, null
+React.render todoApp, example

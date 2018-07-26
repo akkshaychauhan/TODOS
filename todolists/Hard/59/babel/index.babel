@@ -1,0 +1,240 @@
+const { Component } = React;
+const { connect, Provider } = ReactRedux;
+const { combineReducers, createStore } = Redux;
+const ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
+
+//action types
+const ADD_TODO = "ADD_TODO";
+const REMOVE_TODO = "REMOVE_TODO";
+const TOGGLE_TODO = "TOGGLE_TODO";
+const SET_FILTER = "SET_FILTER";
+
+//seed todos
+const exampleTodos = [
+  {
+    text: "react",
+    completed: false
+  },{
+    text: "redux",
+    completed: true
+  },{
+    text: "repeat",
+    completed: false
+  }
+];
+
+//reducers
+const todos = (todos = exampleTodos, action) => {
+  switch (action.type) {
+    case ADD_TODO:
+      return [
+        ...todos,
+        { 
+          text: action.text, 
+          completed: false
+        }
+      ];
+    case REMOVE_TODO: 
+      return [
+        ...todos.slice(0, action.i),
+        ...todos.slice(action.i + 1)
+      ];
+    case TOGGLE_TODO:
+      return todos.map((t, i) => {
+        let c = t.completed;
+        if (i === action.i) {
+          return Object.assign({}, t, {
+             completed: !c                 
+          })
+        } return t;
+      })
+    default: return todos;
+  }
+}
+
+const filter = (filter = "SHOW_ALL", action) => {
+  switch (action.type) {
+    case SET_FILTER:
+      return action.filterType;
+    default: 
+      return filter;
+  }
+}
+
+const appReducer = combineReducers({
+  todos,
+  filter
+});
+
+//store
+const store = createStore(appReducer);
+
+//action creators
+const addTodo = (text, i) => ({
+  text,
+  type: ADD_TODO
+});
+
+const removeTodo = (i) => ({
+  i,
+  type: REMOVE_TODO
+});
+
+const toggleTodo = (i) => ({
+  i,
+  type: TOGGLE_TODO
+})
+
+const setFilter = (filterType) => ({
+  filterType,
+  type: SET_FILTER
+})
+
+//presentational components 
+const Todo = ({
+  text, 
+  completed, 
+  index
+}) => (
+  <li>
+      <button
+        className="remove-todo"
+        onClick={()=>store.dispatch(
+          removeTodo(index)
+        )}
+      >
+        <i className="fa fa-times" 
+           aria-hidden="true"
+        ></i>
+      </button>
+      <span>{text}</span>
+      <button
+        className={completed 
+          ? "toggle-todo completed-todo" 
+          : "toggle-todo"}
+        onClick={()=>store.dispatch(
+          toggleTodo(index)
+        )}
+      >
+        <i 
+          className="fa fa-check" 
+          aria-hidden="true"
+        ></i>
+      </button>
+  </li>
+);
+
+const TodoList = ({ todos, filterType }) => (
+  <div className="todos-wrapper">
+      <ReactCSSTransitionGroup
+        className="todos-list"
+        transitionName="todo-group" 
+        transitionEnterTimeout={200} 
+        transitionLeaveTimeout={200}
+        component="ul"
+      >
+        {todos.filter((t) => {
+          if (filterType === "SHOW_COMPLETED") {
+            return t.completed === true;
+          } else if (filterType === "SHOW_UNFINISHED") {
+            return t.completed === false;
+          } return t; 
+        }).reverse().map((t) => (
+          <Todo
+            text={t.text}
+            completed={t.completed}
+            index={todos.indexOf(t)}
+            key={t.text}
+          />
+        ))}
+      </ReactCSSTransitionGroup>
+  </div>
+)
+const mapTodoListStateToProps = (state) => ({
+  todos: state.todos,
+  filterType: state.filter
+});
+const ConnectedTodoList = connect(
+  mapTodoListStateToProps
+)(TodoList);
+  
+const Filters = ({ dispatch }) => (
+  <div className="filters-wrapper">
+    <button 
+      onClick={() => dispatch(
+        setFilter("SHOW_ALL")
+      )}
+    > <span>ALL</span>
+    </button>
+    <button 
+      onClick={() => dispatch(
+        setFilter("SHOW_COMPLETED")
+      )}
+    > <span>FINISHED</span>
+    </button>
+    <button 
+      onClick={() => dispatch(
+        setFilter("SHOW_UNFINISHED")
+      )}
+    > <span>WORKING</span>
+    </button>
+  </div>
+)
+const mapFilterStateToProps = (state) => ({
+  filter: state.filter
+});
+
+const ConnectedFilters = connect(
+  mapFilterStateToProps,
+)(Filters);
+
+const AddTodo = ({ dispatch }) => {
+  let input
+
+  return (
+    <div className="form-wrapper">
+      <form onSubmit={e => {
+        e.preventDefault()
+        if (!input.value.trim()) {
+          return
+        }
+        dispatch(addTodo(input.value))
+        input.value = ''
+      }}>
+        <input ref={node => {
+          input = node
+        }} />
+        <button type="submit">
+          <i className="fa fa-plus-circle" 
+             aria-hidden="true"
+          ></i>
+        </button>
+      </form>
+    </div>
+  )
+}
+const ConnectedAddTodo = connect()(AddTodo)
+
+const TodosApp = () => (
+  <div className="app-wrapper">
+    <ConnectedFilters />
+    <ConnectedTodoList />
+    <ConnectedAddTodo />
+  </div>
+);
+
+// index.js
+class App extends Component  {
+  render () {
+    return (
+      <TodosApp />
+    )
+  }
+};
+
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById("root")
+)
