@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>Vue.js Todo App</title>
+  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+
+  <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css'>
+<link rel='stylesheet prefetch' href='https://fonts.googleapis.com/css?family=Catamaran'>
+
+      <link rel="stylesheet" href="css/style.css">
+
+  
+</head>
+
+<body>
+
+  <div class="container">
+	<div id="todoList">
+		<h1>todo</h1>
+		<div class="controls">
+			<input type="text" v-model="task" placeholder="Enter a task:" onkeyup="handleKeyUp(event)"/>
+			<button @click="addTask" id="submit">Add</button>
+<!-- 			<button @click="saveList">Save</button> -->
+		</div>
+		<div class='task-list'>
+			<task-item v-for="(item, index) in taskList" :text="item.text" :status="item.completed" :number="index"></task-item>
+		</div>
+	</div>
+</div>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.1/vue.min.js'></script>
+
+  
+
+    <script  src="js/index.js"></script>
+
+
+
+
+</body>
+
+</html>

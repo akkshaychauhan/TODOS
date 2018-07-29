@@ -1,0 +1,25 @@
+body{
+    width:auto; 
+    background-color: black;
+    position: relative;
+}
+img{
+    height:400px;
+    width:400px; 
+    padding: 6px;
+}
+h1{
+    color:wheat;
+}
+.image1 :hover {
+    opacity: .5;
+    transform: scale(1.1);
+}
+.image2 :hover {
+    opacity: .5;
+    transform: scale(1.1);
+}
+.image3 :hover {
+    opacity: .5;
+    transform: scale(1.1);
+}
